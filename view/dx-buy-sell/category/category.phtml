@@ -1,0 +1,32 @@
+<?php
+
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+$html = '';
+$this->dxBuySellCategory()->setRepo($this->categoryRepo)->setCategory($this->category);
+$crumb = array(
+	'url' => '/' . ($this->entityType == 'sell' ?'forsale' : 'tobuy'),
+	'title' => ($this->entityType == 'sell' ?'For Sale Items' : 'To Buy Items'),
+	'anchor' => ($this->entityType == 'sell' ?'For Sale' : 'To Buy')
+);
+$this->dxBreadcrumb()->add(($this->entityType == 'sell' ?'forsale' : 'tobuy'), $crumb);
+$this->dxBuySellCategory()->breadcrumbs();
+$html .= '<h1>' . $this->category->getTitle() . '</h1>';
+$categoryList = $this->dxBuySellCategory()->renderChildrenToList();
+
+$this->dxSidebar()->appendToLeft('categoryTitle', '<h3>Browse Category</h3>');
+$this->dxSidebar()->appendToLeft('categoryList', $categoryList);
+
+if(count($this->categoryRepo->children($this->category)) == 0)
+{
+	$createUrlParams = array();
+	$createUrlParams['category_slug'] = $this->category->getSlug();
+	$createUrl = $this->url('dx-buy-sell-' . ($this->entityType == 'sell' ?'forsale' : 'tobuy') . '/create', $createUrlParams);
+	$newPostHtml = '<button onclick="document.location=\'' . $createUrl . '\'" class="btn btn-large btn-block btn-primary" type="button">Create a Post here</button>';
+	$this->dxSidebar()->appendToRight('newPost', $newPostHtml);
+}
+
+echo $html;
+?>
