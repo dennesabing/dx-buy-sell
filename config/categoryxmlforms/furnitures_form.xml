@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <form>
+		<name>FormName</name>
+		<attributes>
+			<method>post</method>
+		</attributes>
+		<element>
+			<name>hiddenField</name>
+			<type>Zend\Form\Element\Hidden</type>
+		</element>
+		<element>
+			<name>select</name>
+			<type>Zend\Form\Element\Select</type>
+			<after>elementAfter</after>
+			<before>elementBefore</before>
+			<options>
+				<label>Select 1</label>
+				<hint>Hint</hint>
+				<description>Description</description>
+				<value_options>
+					<alpha>Alpha</alpha>
+					<beta>Beta</beta>
+					<gamma>Gamma</gamma>
+					<delta>Delta</delta>
+				</value_options>
+			</options>
+		</element>
+		<element>
+			<name>selectxx</name>
+			<type>Zend\Form\Element\Select</type>
+			<options>
+				<label>Select 2</label>
+				<hint>Hint</hint>
+				<description>Description</description>
+				<value_options>
+					<alpha>Alpha</alpha>
+					<beta>Beta</beta>
+					<gamma>Gamma</gamma>
+					<delta>Delta</delta>
+				</value_options>
+			</options>
+		</element>
+		<element>
+			<name>selectxxx</name>
+			<type>Zend\Form\Element\Select</type>
+			<after>select</after>
+			<options>
+				<label>Select 3</label>
+				<hint>Hint</hint>
+				<description>Description</description>
+				<value_options>
+					<alpha>Alpha</alpha>
+					<beta>Beta</beta>
+					<gamma>Gamma</gamma>
+					<delta>Delta</delta>
+				</value_options>
+			</options>
+		</element>
+	</form>
+</config>

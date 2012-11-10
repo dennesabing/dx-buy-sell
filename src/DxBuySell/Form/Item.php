@@ -11,12 +11,12 @@ class Item extends Form
 	 * Constructor
 	 * @param object $category The Category
 	 */
-	public function __construct($category = NULL)
+	public function __construct($xmlFile = NULL)
 	{
 		parent::__construct();
-
-		$this->setName('demoFormBlock');
+		$this->setName('itemform');
 		$this->setAttribute('method', 'post');
+		$this->formFromXml($xmlFile);
 
 		//Hidden
 		$this->add(array(
@@ -180,21 +180,21 @@ class Item extends Form
 				)));
 
 		//Select
-		$this->add(array(
-			'name' => 'select',
-			'type' => 'Zend\Form\Element\Select',
-			'options' => array(
-				'label' => 'Select',
-				'hint' => 'Hint',
-				'description' => 'Description.',
-				'value_options' => array(
-					'alpha' => 'Alpha',
-					'beta' => 'Beta',
-					'gamma' => 'Gamma',
-					'delta' => 'Delta',
-				),
-			),
-		));
+//		$this->add(array(
+//			'name' => 'select',
+//			'type' => 'Zend\Form\Element\Select',
+//			'options' => array(
+//				'label' => 'Select',
+//				'hint' => 'Hint',
+//				'description' => 'Description.',
+//				'value_options' => array(
+//					'alpha' => 'Alpha',
+//					'beta' => 'Beta',
+//					'gamma' => 'Gamma',
+//					'delta' => 'Delta',
+//				),
+//			),
+//		));
 
 		//Multiselect
 		$this->add(array(

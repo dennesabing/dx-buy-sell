@@ -30,7 +30,14 @@ class CreateController extends MainController
 			}
 		}
 
-		$form = new \DxBuySell\Form\Item();
+		$formXmlFile = NULL;
+		if(isset($category))
+		{
+			$formXmlPrefix = $category->getSlug();
+			$formXmlFile = __DIR__ . '/../../../config/categoryxmlforms/' . $formXmlPrefix . '_form.xml';
+			$viewData['formXmlDisplayOptions'] = __DIR__ . '/../../../config/categoryxmlforms/' . $formXmlPrefix . '_formDisplayOptions.xml';
+		}
+		$form = new \DxBuySell\Form\Item($formXmlFile);
 		$inputFilter = new \DxBuySell\Form\ItemInputFilter();
 		$form->setInputFilter($inputFilter);
 		$validData = null;
