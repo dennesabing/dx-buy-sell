@@ -39,6 +39,18 @@ class Module extends xModule
 		);
 	}
 
+	public function getServiceConfig()
+	{
+		return array(
+            'factories' => array(
+                'dx-bu-sell_module_options' => function ($sm) {
+//                    $config = $sm->get('Config');
+//                    return new Options\ModuleOptions(isset($config['zfcuser']) ? $config['zfcuser'] : array());
+                }
+			)
+		);
+	}
+	
 	public function getViewHelperConfig()
 	{
 		return array(

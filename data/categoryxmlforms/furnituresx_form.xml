@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <form>
+		<element>
+			<name>hiddenField</name>
+			<type>Zend\Form\Element\Hidden</type>
+		</element>	
+		<element>
+			<name>select</name>
+			<type>Zend\Form\Element\Select</type>
+			<enable>0</enable>
+			<options>
+				<label>Select 1</label>
+				<hint>Hint</hint>
+				<description>Description</description>
+				<value_options>
+					<alpha>Alpha</alpha>
+					<beta>Beta</beta>
+					<gamma>Gamma</gamma>
+					<delta>Delta</delta>
+				</value_options>
+			</options>
+		</element>
+	</form>
+</config>

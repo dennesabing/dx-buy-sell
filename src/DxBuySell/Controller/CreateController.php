@@ -30,12 +30,18 @@ class CreateController extends MainController
 			}
 		}
 
-		$formXmlFile = NULL;
-		if(isset($category))
+		$pathToXmlForms = __DIR__ . '/../../../data/categoryxmlforms/';
+		$formMainXmlFile = $pathToXmlForms . 'form.xml';
+		$formXmlFile = \Dx\Reader\Xml::toArray($formMainXmlFile);
+		if (isset($category))
 		{
 			$formXmlPrefix = $category->getSlug();
-			$formXmlFile = __DIR__ . '/../../../config/categoryxmlforms/' . $formXmlPrefix . '_form.xml';
-			$viewData['formXmlDisplayOptions'] = __DIR__ . '/../../../config/categoryxmlforms/' . $formXmlPrefix . '_formDisplayOptions.xml';
+			if (\Dx\File::check($pathToXmlForms . $formXmlPrefix . '_form.xml'))
+			{
+				$formCategoryXmlFile = \Dx\Reader\Xml::toArray($pathToXmlForms . $formXmlPrefix . '_form.xml');
+				$formXmlFile = \Dx\ArrayManager::merge($formCategoryXmlFile, $formXmlFile);
+			}
+			$viewData['formXmlDisplayOptions'] = $pathToXmlForms . $formXmlPrefix . '_formDisplayOptions.xml';
 		}
 		$form = new \DxBuySell\Form\Item($formXmlFile);
 		$inputFilter = new \DxBuySell\Form\ItemInputFilter();
@@ -55,44 +61,4 @@ class CreateController extends MainController
 		$viewData['validData'] = $validData;
 		return $this->getViewModel($viewData);
 	}
-
-	protected function formGeneral($form, $inputFilter, $formFile, $inputFilterFile, $viewScriptFile, $formTemplate, $formType, $pageHeading)
-	{
-		$form->setInputFilter($inputFilter);
-		$validData = null;
-		if ($this->request->isPost())
-		{
-			$form->setData($this->request->getPost());
-			if ($form->isValid())
-			{
-				$formData = $form->getData();
-				$validData = \Zend\Debug\Debug::dump($formData, 'Valid form data', false);
-			}
-		}
-		//Source code
-		$moduleDir = realpath(__DIR__ . '/../../../');
-		$formSource = file_get_contents($moduleDir . $formFile);
-		$inputFilterSource = file_get_contents($moduleDir . $inputFilterFile);
-		$viewScriptSource = file_get_contents($moduleDir . $viewScriptFile);
-		$viewModelForm = new ViewModel();
-		$viewModelForm->setVariables(array(
-			'form' => $form,
-			'formType' => $formType,
-			'validData' => $validData,
-		));
-		$viewModelForm->setTemplate($formTemplate);
-		$viewModel = $this->getViewModel();
-		$viewModel->setVariables(array(
-			'pageHeading' => $pageHeading,
-			'formFile' => $formFile,
-			'formSource' => $formSource,
-			'inputFilterFile' => $inputFilterFile,
-			'inputFilterSource' => $inputFilterSource,
-			'viewScriptFile' => $viewScriptFile,
-			'viewScriptSource' => $viewScriptSource,
-		));
-		$viewModel->addChild($viewModelForm, 'formOutput');
-		return $viewModel;
-	}
-
 }
