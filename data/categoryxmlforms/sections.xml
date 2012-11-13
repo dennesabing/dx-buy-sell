@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <form>
+		<name>createSection</name>
+		<attributes>
+			<method>post</method>
+			<action>/create</action>
+		</attributes>
+		<fieldset></fieldset>
+		<fieldset>
+			<name>fsSection</name>
+			<type>Zend\Form\Fieldset</type>
+			<options>
+				<legend>Select where you wan to post your Ad</legend>
+			</options>
+		</fieldset>
+		<element>
+			<name>csrf</name>
+			<type>Zend\Form\Element\Csrf</type>
+		</element>
+		<element>
+			<name>adSection</name>
+			<type>Zend\Form\Element\Radio</type>
+			<fieldset>fsSection</fieldset>
+			<options>
+				<label></label>
+				<value_options>
+					<forsale_items>For Sale Items</forsale_items>
+					<real_estates>Real Estates</real_estates>
+					<autos>Autos</autos>
+					<services>Services</services>
+				</value_options>
+			</options>
+		</element>
+		<element>
+			<name>submitBtn</name>
+			<type>Zend\Form\Element\Submit</type>
+			<options>
+				<label>Submit</label>
+				<primary>1</primary>
+			</options>
+			<attributes>
+				<value>Submit</value>
+			</attributes>
+		</element>
+		<filters>
+			<fieldset>
+				<fsSection>
+					<adSection>
+						<required>1</required>
+					</adSection>	
+				</fsSection>
+			</fieldset>
+		</filters>
+	</form>
+</config>

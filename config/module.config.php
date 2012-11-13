@@ -1,4 +1,5 @@
 <?php
+
 $config = array(
 	'view_manager' => array(
 		'template_path_stack' => array(
@@ -14,6 +15,66 @@ $config = array(
 	),
 	'router' => array(
 		'routes' => array(
+			'dx-buy-sell-create' => array(
+				'type' => 'Literal',
+				'options' => array(
+					'route' => '/create',
+					'defaults' => array(
+						'__NAMESPACE__' => 'DxBuySell\Controller',
+						'controller' => 'DxBuySell\Controller\Create',
+						'action' => 'index',
+						'entity_type' => 'sell'
+					),
+				),
+				'may_terminate' => true,
+				'child_routes' => array(
+					'section' => array(
+						'type' => 'Segment',
+						'options' => array(
+							'route' => '/section',
+							'defaults' => array(
+								'action' => 'index',
+							),
+						),
+					),
+					'category' => array(
+						'type' => 'Segment',
+						'options' => array(
+							'route' => '/category',
+							'defaults' => array(
+								'action' => 'category',
+							),
+						),
+					),
+					'details' => array(
+						'type' => 'Segment',
+						'options' => array(
+							'route' => '/details',
+							'defaults' => array(
+								'action' => 'details',
+							),
+						),
+					),
+					'credits' => array(
+						'type' => 'Segment',
+						'options' => array(
+							'route' => '/credits',
+							'defaults' => array(
+								'action' => 'credits',
+							),
+						),
+					),
+					'success' => array(
+						'type' => 'Segment',
+						'options' => array(
+							'route' => '/success',
+							'defaults' => array(
+								'action' => 'success',
+							),
+						),
+					)
+				)
+			),
 			'dx-buy-sell-forsale' => array(
 				'type' => 'Literal',
 				'options' => array(

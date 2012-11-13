@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<display>
+		<fieldsets>
+			<fsSection>
+				<display_legend>1</display_legend>
+				<elements>
+					<adSection>
+						<required>1</required>
+					</adSection>
+				</elements>
+			</fsSection>
+		</fieldsets>
+		<elements>
+			<submitBtn>
+				<class>btn-large</class>
+			</submitBtn>
+		</elements>
+	</display>
+</config>

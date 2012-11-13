@@ -1,143 +1,19 @@
 <?php
 
 $html = '';
-if(isset($this->category) && isset($this->categoryRepo))
-{
-	$this->dxBuySellCategory()->setRepo($this->categoryRepo)->setCategory($this->category);
-}
 $crumb = array(
-	'url' => '/' . ($this->entityType == 'sell' ?'forsale' : 'tobuy'),
-	'title' => ($this->entityType == 'sell' ?'For Sale Items' : 'To Buy Items'),
-	'anchor' => ($this->entityType == 'sell' ?'For Sale' : 'To Buy')
+	'url' => '/' . ($this->entityType == 'sell' ? 'forsale' : 'tobuy'),
+	'title' => ($this->entityType == 'sell' ? 'For Sale Items' : 'To Buy Items'),
+	'anchor' => ($this->entityType == 'sell' ? 'For Sale' : 'To Buy')
 );
-$this->dxBreadcrumb()->add(($this->entityType == 'sell' ?'forsale' : 'tobuy'), $crumb);
-if(isset($this->category) && isset($this->categoryRepo))
-{
-	$this->dxBuySellCategory()->breadcrumbs();
-}
-$this->dxBreadcrumb()->add('Create new post', array('anchor' => 'Create new Post'));
+$this->dxBreadcrumb()->add(($this->entityType == 'sell' ? 'forsale' : 'tobuy'), $crumb);
+$this->dxBreadcrumb()->add('New Ad', array('anchor' => 'New Ad'));
 
-$html .= '<h1>Create a New Post</h1>';
-
-
-//Prepare Display options to fine tune the form presentation
-//This is optional, your form can be rendered without any display options
-$displayOptions = array(
-    //The class attribute added to the form tag
-    //'class'                 => 'my-form-class',
-    'fieldsets'             => array(
-        'fsOne'                 => array(
-            //The class attribute added to the fieldset class
-            //'class'             => 'my-fsOne-class',
-            //Should the display legend be shown? (If this option is not defined, defaults to true.)
-            'display_legend'        => true,
-            'elements'              => array(
-                'text'                  => array(
-                    'class'                 => 'span3',
-                    'required'              => true,
-                ),
-                'password'              => array(
-                    'class'                 => 'span3',
-                    'required'              => true,
-                    //'prependIcon'           => 'icon-heart',
-                    //'appendIcon'            => 'icon-glass',
-                ),
-                'textarea'              => array(
-                    'class'                 => 'span4',
-                    'rows'                  => 3,
-                    'required'              => false,
-                ),
-            ),
-        ),
-        'fsTwo'                 => array(
-            'elements'              => array(
-                'checkbox'              => array(
-                    'required'              => false,
-                ),
-                'radio'                 => array(
-                    'required'              => true,
-                ),
-                'radioInline'           => array(
-                    'inline'                => true,
-                    'required'              => true,
-                ),
-                'multiCheckbox'         => array(
-                    'required'              => false,
-                ),
-                'multiCheckboxInline'   => array(
-                    'inline'                => true,
-                    'required'              => false,
-                ),
-            ),
-        ),
-    ),
-    'elements'              => array(
-        'select'                => array(
-            'class'                 => 'span3',
-            'required'              => true,
-            'size'                  => 1,   //Optional, default == 1
-        ),
-        'multiSelect'           => array(
-            'class'                 => 'span2',
-            'required'              => true,
-            'size'                  => 4,   //Optional
-        ),
-        'file'                  => array(
-            'required'              => false,
-        ),
-        'textAp'                => array(
-            'class'                 => 'input-medium',
-        ),
-        'iconAp'                => array(
-            'class'                 => 'input-medium',
-            'prependIcon'           => 'icon-heart',
-            'appendIcon'            => 'icon-glass',
-        ),
-        'submitBtn'             => array(
-            'class'                 => 'btn-large',
-        ),
-    ),
-);
-
-
-//Form object
-$form           = $this->form;
-//Form type - one of the Twitter Bootstrap form types (horizontal, vertical, inline, search)
-//To set the form type, use the \DluTwBootstrap\Form\FormUtil::FORM_TYPE_... constants
-//The form type will be usually set here in the view script (to reuse the same view script/action controller method,
-//this demo sets the form type in the action controller)
-$formType       = $this->formType;
-//Validated data (if any)
-$validData      = $this->validData;
-/* @var $form \DluTwBootstrapDemo\Form\BlockForm */
+$html .= '<h1>Create a New Ad</h1>';
+$form = $this->form;
 $form->prepare();
 if ($form->getMessages()):
-?>
-    <div class="alert alert-error">
-        <button class="close" data-dismiss="alert" type="button">×</button>
-        <strong>Invalid input!</strong>
-        The form fields are not filled out correctly.
-    </div>
-<?php elseif ($validData): ?>
-    <div class="alert alert-success">
-        <button class="close" data-dismiss="alert" type="button">×</button>
-        <strong>Form data is valid!</strong>
-        The following data has been received from the form.
-    </div>
-    <?php echo($validData); ?>
-<?php else: ?>
-    <div class="alert alert-info">
-        <button class="close" data-dismiss="alert" type="button">×</button>
-        <strong>Submit the form:</strong>
-        To see the error messages, just submit the empty form. Or enter the data correctly to see the validated values.
-    </div>
-<?php
+	$this->dxAlert()->addError('<strong>Invalid Input!</strong> The form fields are not filled out correctly.');
 endif;
-
-//Default form display (the 'one-liner')
-//Good for quick form preview or when there are no special presentation requirements
-//If you need more control over the form view, use the 'controlled' approach below
-$html .= $this->formTwb($form, $formType, $displayOptions);
-
-
+$html .= $this->formTwb($form, $formType, $this->formDisplayOptions);
 echo $html;

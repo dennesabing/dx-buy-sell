@@ -5,7 +5,7 @@ namespace DxBuySell\Form;
 use Dx\Form;
 use Zend\Form\Element;
 
-class Item extends Form
+class CreateDetails extends Form
 {
 	/**
 	 * Constructor

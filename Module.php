@@ -47,12 +47,27 @@ class Module extends xModule
                     $config = $sm->get('Config');
                     return new Options\Module(isset($config['dxbuysell']) ? $config['dxbuysell'] : array());
                 },
-				'dxbuysell_form_item' => function($sm)
+				'dxbuysell_form_create_section' => function($sm)
 				{
                     $options = $sm->get('dxbuysell_options');
-                    $form = new \DxBuySell\Form\Item('postCreate', NULL, $options);
-//                    $form->setInputFilter();
+                    $form = new \DxBuySell\Form\CreateSection('postCreate', NULL, $options);
                     return $form;
+				},
+				'dxbuysell_form_create_section_filter' => function($sm)
+				{
+                    $options = $sm->get('dxbuysell_options');
+                    $filter = new \DxBuySell\Form\CreateSectionInputFilter(NULL, $options);
+                    return $filter;
+				},
+				'dxbuysell_form_create_details' => function($sm)
+				{
+                    $options = $sm->get('dxbuysell_options');
+                    $form = new \DxBuySell\Form\CreateDetails('postCreate', NULL, $options);
+                    return $form;
+				},
+				'dxbuysell_session' => function($sm)
+				{
+                    return new \Zend\Session\Container('dxbuysell');
 				}
 			)
 		);
