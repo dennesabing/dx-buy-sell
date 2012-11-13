@@ -43,7 +43,8 @@ class CreateController extends MainController
 			}
 			$viewData['formXmlDisplayOptions'] = $pathToXmlForms . $formXmlPrefix . '_formDisplayOptions.xml';
 		}
-		$form = new \DxBuySell\Form\Item($formXmlFile);
+		$form = $this->getServiceLocator()->get('dxbuysell_form_item');
+		$form->setXmlForm($formXmlFile)->formFromXml();
 		$inputFilter = new \DxBuySell\Form\ItemInputFilter();
 		$form->setInputFilter($inputFilter);
 		$validData = null;

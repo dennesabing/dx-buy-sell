@@ -43,10 +43,17 @@ class Module extends xModule
 	{
 		return array(
             'factories' => array(
-                'dx-bu-sell_module_options' => function ($sm) {
-//                    $config = $sm->get('Config');
-//                    return new Options\ModuleOptions(isset($config['zfcuser']) ? $config['zfcuser'] : array());
-                }
+                'dxbuysell_options' => function ($sm) {
+                    $config = $sm->get('Config');
+                    return new Options\Module(isset($config['dxbuysell']) ? $config['dxbuysell'] : array());
+                },
+				'dxbuysell_form_item' => function($sm)
+				{
+                    $options = $sm->get('dxbuysell_options');
+                    $form = new \DxBuySell\Form\Item('postCreate', NULL, $options);
+//                    $form->setInputFilter();
+                    return $form;
+				}
 			)
 		);
 	}

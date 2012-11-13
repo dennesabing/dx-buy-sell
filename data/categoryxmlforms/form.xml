@@ -151,5 +151,16 @@
 				</value_options>
 			</options>
 		</element>
+		<element>
+			<name>submitBtn</name>
+			<type>Zend\Form\Element\Submit</type>
+			<options>
+				<label>Submit</label>
+				<primary>1</primary>
+			</options>
+			<attributes>
+				<value>Submit</value>
+			</attributes>
+		</element>
 	</form>
 </config>

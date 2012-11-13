@@ -6,6 +6,9 @@ use Dx\Mvc\Controller\FrontendController;
 
 class MainController extends FrontendController
 {
+	
+	protected $modulePrefix = 'dxbuysell';
+	
 	/**
 	 * The URL Query name of the selecte item
 	 * @var string
