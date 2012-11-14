@@ -1,0 +1,8 @@
+tobuy
+buy
+sale
+forsale
+create
+update
+new
+delete

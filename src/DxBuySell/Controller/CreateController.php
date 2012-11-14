@@ -15,6 +15,11 @@ class CreateController extends MainController
 
 	public function indexAction()
 	{
+		$start = '2012-10-5';
+		$end = '2012-11-5';
+		$interval = 'P1D';		
+		dump(\Dx\Date::range($start, $end, $interval));
+		die;
 		$this->layout('layout/2column-rightbar');
 		$this->setStep('section');
 		if ($this->getStep() == NULL || $this->getStep() == 'section')

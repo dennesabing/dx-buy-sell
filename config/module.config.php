@@ -2,8 +2,23 @@
 
 $config = array(
 	'view_manager' => array(
+		'display_not_found_reason' => true,
+		'display_exceptions' => true,
+		'doctype' => 'HTML5',
+		'not_found_template' => 'error/404',
+		'exception_template' => 'error/index',
+		'template_map' => array(
+			'layout/layout' =>  __DIR__ . '/../view/theme/default/layout/1column.phtml',
+			'layout/1column' => __DIR__ . '/../view/theme/default/layout/1column.phtml',
+			'layout/2column-leftbar' => __DIR__ . '/../view/theme/default/layout/2column-leftbar.phtml',
+			'layout/2column-rightbar' => __DIR__ . '/../view/theme/default/layout/2column-rightbar.phtml',
+			'layout/3column' => __DIR__ . '/../view/theme/default/layout/3column.phtml',
+			'error/404' => __DIR__ . '/../view/theme/default/view/error/404.phtml',
+			'error/index' => __DIR__ . '/../view/theme/default/view/error/index.phtml',
+		),
 		'template_path_stack' => array(
-			'dxbuysell' => __DIR__ . '/../view',
+			 __DIR__ . '/../view/theme/default/partials/',
+			'dx-buy-sell' => __DIR__ . '/../view'
 		),
 	),
 	'controllers' => array(
